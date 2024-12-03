@@ -1,0 +1,155 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e1f4fe; /* Soft Blue */
+    padding: 20px;
+}
+
+/* Header Section */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1E40AF; /* Dark Blue */
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: #374151; /* Dark Gray */
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Search Input and Button */
+#city-input {
+    padding: 12px;
+    width: 75%;
+    border-radius: 0.5rem;
+    border: 1px solid #cccccc;
+    font-size: 1rem;
+    outline: none;
+}
+
+#search-btn {
+    padding: 12px 20px;
+    background-color: #1E40AF; /* Dark Blue */
+    color: #ffffff;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+#search-btn:hover {
+    background-color: #2563eb; /* Lighter Blue */
+}
+
+/* Weather Card Styling */
+.weather-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 0.75rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weather-card img {
+    width: 100px;
+    height: 100px;
+}
+
+.weather-info {
+    text-align: left;
+}
+
+.weather-info h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #1E40AF; /* Dark Blue */
+}
+
+.weather-info p {
+    font-size: 1.125rem;
+    color: #4B5563; /* Gray */
+}
+
+/* Weather Details Grid */
+.weather-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.weather-details .label {
+    font-weight: bold;
+    color: #374151;
+}
+
+.weather-details .value {
+    color: #2563eb;
+}
+
+/* 5-Day Forecast Styling */
+.forecast-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 0.75rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.forecast-card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.forecast-card h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.forecast-card p {
+    font-size: 1rem;
+    color: #6B7280; /* Gray */
+}
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.forecast-container .forecast-card {
+    background-color: #f9fafb; /* Lighter Background for the Forecast Cards */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .forecast-container {
+        grid-template-columns: 1fr; /* One column on mobile */
+    }
+
+    #city-input {
+        width: 100%; /* Full width for mobile */
+    }
+
+    .weather-card {
+        grid-template-columns: 1fr; /* Single column for weather card */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+}
+.forecast-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
