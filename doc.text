@@ -1,0 +1,20 @@
+update in github and keep update On EOD
+module1
+current location presentation
+{
+	loader till location is not allowed
+	fetch current location data
+}
+module1
+search by button{
+	replace fetched data with current data.
+}
+5 days from today data {
+	1. it should show data 5 days from today .
+	2. replace data according to search inputs.
+	3. Implement dropdown menu for recently searched cities. use localstorage
+	Initially there should not be any dropdown since there is no searched city.
+	Validate user inputs to prevent errors
+}
+
+maintain readme
