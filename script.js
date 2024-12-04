@@ -1,5 +1,113 @@
+// Elements for search history
+const searchHistoryContainer = document.getElementById('searchHistoryContainer');
+const searchHistoryList = document.createElement('ul');
+searchHistoryList.classList.add('list-disc', 'list-inside', 'p-4', 'rounded-lg', 'shadow-md');
+searchHistoryContainer?.appendChild(searchHistoryList);
+
+// Function to update search history in localStorage
+function updateSearchHistory(city) {
+    const cities = JSON.parse(localStorage.getItem('recentCities')) || [];
+
+    // Avoid duplicates
+    if (!cities.includes(city)) {
+        cities.unshift(city); // Add the new city to the beginning
+
+        // Limit to 5 searches
+        if (cities.length > 5) {
+            cities.pop(); // Remove the oldest city
+        }
+
+        localStorage.setItem('recentCities', JSON.stringify(cities));
+    }
+
+    // renderSearchHistory(); // Update the UI
+}
+
+// Function to render search history
+// function renderSearchHistory() {
+//     const cities = JSON.parse(localStorage.getItem('recentCities')) || [];
+
+//     // Clear the list
+//     searchHistoryList.innerHTML = '';
+
+//     // If no cities, hide the history container
+//     if (cities.length === 0) {
+//         searchHistoryContainer.classList.add('hidden');
+//         return;
+//     }
+
+//     // Otherwise, show the history container
+//     searchHistoryContainer.classList.remove('hidden');
+
+//     // Populate the list
+//     cities.forEach(city => {
+//         const listItem = document.createElement('li');
+//         listItem.textContent = city;
+//         // listItem.classList.add('cursor-pointer', 'hover:text-blue-500');
+//         historyItem.classList.add(
+//             'px-3',
+//             'py-1',
+//             'bg-gray-200',
+//             'border',
+//             'border-gray-300',
+//             'rounded-md',
+//             'cursor-pointer',
+//             'hover:bg-blue-500',
+//             'hover:text-white'
+//         );
+//         listItem.addEventListener('click', () => {
+//             document.getElementById('cityInput').value = city;
+//             document.getElementById('searchButton').click(); // Trigger search
+//         });
+//         searchHistoryList.appendChild(listItem);
+//     });
+// }
+function renderSearchHistory() {
+    const cities = JSON.parse(localStorage.getItem('recentCities')) || [];
+    // const searchHistoryLabel = document.querySelector('#searchHistoryList p'); // Label element
+
+    // Clear the list
+    searchHistoryList.innerHTML = '';
+    // searchHistoryList.appendChild(searchHistoryLabel); // Re-add the label
+
+    // If no cities, hide the history container
+    if (cities.length === 0) {
+        searchHistoryContainer.classList.add('hidden');
+        return;
+    }
+
+    // Otherwise, show the history container
+    searchHistoryContainer.classList.remove('hidden');
+    const label = document.createElement('p');
+    label.textContent = 'Recent Searches:';
+    label.classList.add('font-semibold', 'text-gray-700');
+    searchHistoryList.appendChild(label);
+
+    // Populate the list with inline items
+    cities.forEach(city => {
+        const historyItem = document.createElement('button');
+        historyItem.textContent = city;
+        historyItem.classList.add(
+            'bg-blue-200',
+            'rounded',
+            'px-4',
+            'py-2',
+            'hover:bg-blue-300',
+            'transition',
+            'cursor-pointer'
+
+        );
+        historyItem.addEventListener('click', () => {
+            document.getElementById('cityInput').value = city;
+            document.getElementById('searchButton').click(); // Trigger search
+        });
+        searchHistoryList.appendChild(historyItem);
+    });
+}
+
 
 window.onload = function () {
+    renderSearchHistory();
     // Apply initial blur
     document.querySelector('.content').classList.add('blur-md');
 
@@ -82,7 +190,13 @@ window.onload = function () {
 const searchButton = document.getElementById("searchButton");
 
 searchButton.addEventListener("click", function() {
-    const cityInput = document.getElementById("cityInput").value; // Get the input value when the button is clicked
+    
+    const cityInput = document.getElementById('cityInput').value.trim();
+    if (cityInput) {
+        updateSearchHistory(cityInput);
+        // Render search history immediately
+    renderSearchHistory();
+    }
 
     // Fetch data from the API
     fetch(`https://api.weatherapi.com/v1/current.json?key=685d9b051845404c88361332240112&q=${cityInput}`)
@@ -154,3 +268,4 @@ forecastContainer.insertAdjacentHTML('beforeend', forecastCard);
     console.error('Error fetching 5-day forecast:', error);
 });
 });
+// search history function
