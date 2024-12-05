@@ -1,3 +1,7 @@
+function clearSearchHistory() {
+    localStorage.removeItem('recentCities'); // Remove from localStorage
+    renderSearchHistory(); // Re-render to update UI
+}
 // Elements for search history
 const searchHistoryContainer = document.getElementById('searchHistoryContainer');
 const searchHistoryList = document.createElement('ul');
@@ -23,45 +27,10 @@ function updateSearchHistory(city) {
     // renderSearchHistory(); // Update the UI
 }
 
-// Function to render search history
-// function renderSearchHistory() {
-//     const cities = JSON.parse(localStorage.getItem('recentCities')) || [];
 
-//     // Clear the list
-//     searchHistoryList.innerHTML = '';
 
-//     // If no cities, hide the history container
-//     if (cities.length === 0) {
-//         searchHistoryContainer.classList.add('hidden');
-//         return;
-//     }
 
-//     // Otherwise, show the history container
-//     searchHistoryContainer.classList.remove('hidden');
 
-//     // Populate the list
-//     cities.forEach(city => {
-//         const listItem = document.createElement('li');
-//         listItem.textContent = city;
-//         // listItem.classList.add('cursor-pointer', 'hover:text-blue-500');
-//         historyItem.classList.add(
-//             'px-3',
-//             'py-1',
-//             'bg-gray-200',
-//             'border',
-//             'border-gray-300',
-//             'rounded-md',
-//             'cursor-pointer',
-//             'hover:bg-blue-500',
-//             'hover:text-white'
-//         );
-//         listItem.addEventListener('click', () => {
-//             document.getElementById('cityInput').value = city;
-//             document.getElementById('searchButton').click(); // Trigger search
-//         });
-//         searchHistoryList.appendChild(listItem);
-//     });
-// }
 function renderSearchHistory() {
     const cities = JSON.parse(localStorage.getItem('recentCities')) || [];
     // const searchHistoryLabel = document.querySelector('#searchHistoryList p'); // Label element
@@ -82,7 +51,6 @@ function renderSearchHistory() {
     label.textContent = 'Recent Searches:';
     label.classList.add('font-semibold', 'text-gray-700');
     searchHistoryList.appendChild(label);
-
     // Populate the list with inline items
     cities.forEach(city => {
         const historyItem = document.createElement('button');
@@ -103,6 +71,23 @@ function renderSearchHistory() {
         });
         searchHistoryList.appendChild(historyItem);
     });
+    // Add Clear History button at the end
+    const clearButton = document.createElement('button');
+    clearButton.textContent = 'Clear History';
+    clearButton.classList.add(
+        'bg-red-500',
+        'text-white',
+        'rounded',
+        'px-4',
+        'py-2',
+        'hover:bg-red-600',
+        'transition',
+        'cursor-pointer',
+        'mt-2',
+        'text-sm'
+    );
+    clearButton.addEventListener('click', clearSearchHistory);
+    searchHistoryList.appendChild(clearButton); // Add at the end
 }
 
 
